@@ -1,0 +1,13 @@
+[Unit]
+Description=Mini Production Backend
+After=network.target
+
+[Service]
+User=tung
+WorkingDirectory=/home/tung/projects/mini-production-lab/backend
+ExecStart=/home/tung/projects/mini-production-lab/.venv/bin/gunicorn --bind 127.0.0.1:8000 app:app
+EnvironmentFile=/etc/mini-production/backend.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
