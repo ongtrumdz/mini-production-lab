@@ -71,6 +71,26 @@ def create_user():
         app.logger.exception("loi tao user")
         return jsonify({"status": "error"}), 500
 
+# Tạo một API gửi client đến data chế độ xóa
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    try:
+        with psycopg.connect(**DB_CONFIG) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "DELETE FROM users WHERE id = %s RETURNING id, name;",(user_id,),
+                )
+                r = cur.fetchone()
+        if r is None:
+            return jsonify({"error": "user not found"}), 404
+
+        return jsonify({"deleted": {"id": r[0], "name": r[1]}}), 200
+    except Exception:
+        app.logger.exception("loi xoa user")
+        return jsonify({"status": "error"}), 500
+
+
+
 # Chạy server
 if __name__ == '__main__':
     # Bật debug=True để server tự khởi động lại khi bạn sửa code
