@@ -94,4 +94,4 @@ def delete_user(user_id):
 # Chạy server
 if __name__ == '__main__':
     # Bật debug=True để server tự khởi động lại khi bạn sửa code
-    app.run( host='0.0.0.0', port=8000)
+    app.run( host='127.0.0.1', port=8000)
