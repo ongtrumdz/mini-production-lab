@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Mini Production Backup Timer
+
+[Timer]
+OnCalendar=daily
+Persistent=True
+Unit=mini-production-backup.service
+
+[Install]
+WantedBy=timers.target
