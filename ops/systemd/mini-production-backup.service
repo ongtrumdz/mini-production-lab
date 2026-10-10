@@ -1,6 +1,7 @@
 [Unit]
 Description=Backup Mini Production Database
-After=postgresql.service
+Requires=postgresql@16-main.service
+After=postgresql@16-main.service
 
 [Service]
 Type=oneshot
